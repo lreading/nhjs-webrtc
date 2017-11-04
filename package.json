@@ -1,0 +1,23 @@
+{
+  "name": "@lreading/nhjs-webrtc-demo",
+  "version": "1.0.0",
+  "description": "A WebRTC demo application for the NH JS Meetup group",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lreading/nhjs-webrtc.git"
+  },
+  "author": "Leo Reading",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lreading/nhjs-webrtc/issues"
+  },
+  "homepage": "https://github.com/lreading/nhjs-webrtc#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
