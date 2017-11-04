@@ -31,7 +31,7 @@ Getting started (live coding / quickstart):
  --- Set the video's srcObject (not compatible with older browsers)
  -- Show a couple options for the constraints object
 
-WebRTC Apis:
+How to Speak WebRTC:
 
 
 Advanced Debugging: 
