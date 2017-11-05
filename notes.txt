@@ -32,6 +32,12 @@ Getting started (live coding / quickstart):
  -- Show a couple options for the constraints object
 
 How to Speak WebRTC:
+    - Create a Peer Connection 
+    - Create an offer to connect to another peer
+    -- Local description is set after the offer is made
+    -- Other peer needs to accept the offer and set its remote description
+    -- If the other peer accepts the offer, the remote description for peer 1 is set
+    
 
 
 Advanced Debugging: 
