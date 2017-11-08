@@ -101,6 +101,8 @@ function stop() {
     peer2 = null;
     sendChannel = null;
     receiveChannel = null;
+
+    // Set back to default state
     dataChannelReceive.value = '';
     dataChannelSend.value = '';
     dataChannelSend.disabled = true;

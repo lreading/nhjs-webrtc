@@ -10,6 +10,7 @@ var callBtn = document.getElementById('callBtn');
 var hangupBtn = document.getElementById('hangUpBtn');
 var localVid = document.getElementById('localVideo');
 var remoteVid = document.getElementById('remoteVideo');
+
 var streamConstraints = {
     audio: false,
     video: true
@@ -51,7 +52,7 @@ function call() {
 
     var servers = null;
 
-    // Create the peer connections.  PC1 will be "us" and PC2 will be the mocked peer.
+    // Create the peer connections.  Peer1 will be "us" and Peer2 will be the mocked peer.
     peer1 = new RTCPeerConnection(servers);
     peer2 = new RTCPeerConnection(servers);
 
@@ -114,6 +115,7 @@ function hangup() {
     peer2 = null;
     localVid.srcObject = null;
     remoteVid.srcObject = null;
+
     hangupBtn.disabled = true;
     callBtn.disabled = true;
     startBtn.disabled = false;
