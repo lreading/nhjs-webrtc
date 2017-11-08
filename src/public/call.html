@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>Make A Video Call</title>
+
+    <style>
+        #localVideo {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            max-width: 350px;
+            max-height: 300px;
+        }
+
+        #remoteVideo {
+            min-width: 75vw;
+            max-height: 80vh;
+        }
+    </style>
+</head>
+
+<body style="text-align: center">
+    <h1>Let's Make A Video Call</h1>
+
+    <video id="localVideo" autoplay></video>
+    <video id="remoteVideo" autoplay></video>
+
+    <div>
+        <button id="startBtn">Start</button>
+        <button id="callBtn">Call</button>
+        <button id="hangUpBtn">Hang Up</button>
+    </div>
+
+    <script src="/lib/adapter.js"></script>
+    <script src="/js/call.js"></script>
+</body>
+
+</html>

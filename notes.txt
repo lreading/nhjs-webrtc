@@ -1,0 +1,106 @@
+What is WebRTC:
+Real Time Communication APIs used for video, audio and arbitrary data.
+
+Credit:
+I stole most of this from https://codelabs.developers.google.com/codelabs/webrtc-web/
+
+Support:
+WebRTC is supported in Firefox, Opera, Chrome, Android and iOS.
+
+Security:
+Encryption is mandatory for all WebRTC components.  You can only use the JS API from securure origins (and localhost for debugging).
+As long as your signaling is done via HTTPS, you should be ok
+
+Signaling:
+WebRTC requires a mechanism to coordinate the communication between peer clients and also to send control messages.  Signaling protocols are not specified by WebRTC.
+
+STUN and TURN:
+In the real world, P2P communication is not always easy (NAT gateways and firewalls).
+The STUN server gets the IP address of your computer, and the TURN server acts as a relay if p2p fails.
+
+Tools:
+ - Express (serving up files locally, can use any server)
+ - webrtc-adapter
+ -- There are some differences in the WebRTC apis across browsers.  The webrtc-adapter library (available as an NPM package) standardizes these.
+
+Getting started (live coding / quickstart):
+ - Use an HTML video element.  Be sure to include the `autoplay` attribute, otherwise you'll only get a single frame.
+ - Add the webrtc-adapter library
+ - Create the javascript to get the video feed
+ -- Create a constraints object (more on this later)
+ -- Use the adapter's promise based api `navigator.mediaDevices.getUserMedia`
+ --- Set the video's srcObject (not compatible with older browsers)
+ -- Show a couple options for the constraints object
+
+How to Speak WebRTC:
+    - Create a Peer Connection 
+    - Create an offer to connect to another peer
+    -- Local description is set after the offer is made
+    -- Other peer needs to accept the offer and set its remote description
+    -- If the other peer accepts the offer, the remote description for peer 1 is set
+    
+
+
+Advanced Debugging: 
+chrome://webrtc-internals
+
+
+
+
+APIs 
+    Acquiring audio/video
+        MediaStream
+            Single source of audio, video or both.
+            Each stream has one or more "track" (audio/video)
+            These are already synchronized for you.
+            You can also use this to get screen captures
+
+    Communicating audio and video
+        RTCPeerConnection
+            This is the transfer protocol for the media streams
+            Things you get for free:
+                Signal processing (removes noise)
+                Codec handling, compression and de-compression
+                p2p route (often times through firewalls, NAT, relays, etc)
+                Security (everything is encrypted)
+                Bandiwdth Management
+            
+    Communicating arbitrary data
+        RTCDataChannel
+            This is used over RTCPeerConnection
+            Benefits:
+                Similar to websockets
+                ultra-low latency
+                unreliable vs reliable (think of it like udp vs tcp)
+                secure
+            Use case: file sharing
+
+    We do really need servers though...
+        Abstract Signlaning
+                No exact protocol
+                Exchange session description objects (what I support and network information)
+                Can use any messaging mechanism
+                Can use any messaging protocol 
+            Browser asks the app for a SessionDescription.
+                Once both have the SessionDescription, they can communicate peer to peer 
+            This is largely abstracted away by WebRTC, but you can tap into this if you need to.
+            
+        STUN
+            Tells me my public IP
+            Very simple server (cheap to run)
+            The data is still routed p2p
+            This *USUALLY* works, but not in every case
+
+        TURN
+            Provides a cloud-based fallback if a p2p connection is impossible
+            Data is sent through the server, so it uses bandwidth
+            Ensures that the calls work in almost all environments
+
+
+        How is this done?
+        ICE 
+            A framework for connecting peers.
+            It knows about STUN and TURN, and finds the best path for each call
+            The majority of traffic goes through STUN 
+
+        Google has source available for their own STUN/TURN servers, and plenty of free, open-source alternatives.  I'm using easyRTC
